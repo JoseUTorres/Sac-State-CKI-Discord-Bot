@@ -1,2 +1,2 @@
 <h1 style="margin: auto; width: 50%;"><img align="center" height="70" style="margin-right: 20px" src="https://cdn.discordapp.com/attachments/489930183143325706/862236688519528458/logoEmote8.png">Sac State CKI Discord Bot</h1>
-<a href="https://github.com/JoseUTorres/CKI-Discord-BOT-JS/releases"><img src="<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/JoseUTorres/CKI-Discord-BOT-JS?display_name=tag&style=for-the-badge">"></a>
+<div style="margin: auto; width: 50%;"><img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/JoseUTorres/Sac-State-CKI-Discord-Bot?include_prereleases&style=for-the-badge" style="margin-left: 150px;"></div>
