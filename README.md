@@ -49,7 +49,7 @@ I will do my best to get features made quickly but I do have work along with my 
 
     - Once the command is entered you will be prompted to enter the message you desire and you will have 10 mins to do so before the the command times out. Type the message right into the text channel you called the command from.
     - I suggest drafting your message before using the command because once schedule you cannot edit or delete your message until it is sent.
-    - Note: If you are using an @ like @everyone I suggest using this command in a private channel with limited people in it to avoid pinging everyone when scheduling your message.
+    - Note: If you are using an @ like @everyone I suggest using this command in a private text channel with limited people in it to avoid pinging everyone when scheduling your message.
 
     <h3 align="center">
         <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1043109700041986108/image.png" alt="/roscoe">
