@@ -20,5 +20,5 @@ If anything this is just a way for me to provide my skills to help the club. I h
 </p>
 
 ## Getting Started
-### Invite the bot
-### Commands
+
+## Commands
