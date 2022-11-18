@@ -1,5 +1,7 @@
+<h3 align="center">
+    <img height="100" src="https://cdn.discordapp.com/attachments/489930183143325706/862236688519528458/logoEmote8.png">
+</h3>
 <h1 align="center">
-    <img align="center" height="60" style="margin-right: 10px" src="https://cdn.discordapp.com/attachments/489930183143325706/862236688519528458/logoEmote8.png">
     Sac State CKI Discord Bot
 </h1>
 <p align="center">
