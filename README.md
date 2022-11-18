@@ -7,7 +7,7 @@
 <p align="center">
     <img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/JoseUTorres/Sac-State-CKI-Discord-Bot?include_prereleases&style=for-the-badge">
 </p>
-<img src="https://live.staticflickr.com/65535/51665025161_3eddcb15b5_w.jpg" alt="ftc" align="right" height="200px">
+<img src="https://live.staticflickr.com/65535/51665025161_3eddcb15b5_w.jpg" alt="ftc" align="right" height="160px">
 
 The Sac State CKI Discord bot is a bot for Circle K International focused discord servers. With discord being used more by clubs there has become a need for CKI specific commands that other bots do not satisfy so this will be the place to provide those features. There was a previous version that was using Python but that version was more of a proof of concept. Now that I know more of what goes into a great bot, I have created a new version written in JS that hopefully works better and is easier to implement/update. I will do my best to get features made quickly but I do have work along with my social life so please be patient with me.
 
