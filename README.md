@@ -22,7 +22,7 @@ I will do my best to get features made quickly but I do have work along with my 
 ## Getting Started
 1. **Invite the bot to your server**
     - Note: You must an admin or owner of the server to invite the bot
-    - This link will let you invite the bot: https://discord.com/api/oauth2/authorize?client_id=840623082988503040&permissions=8&scope=bot
+    - This link will let you invite the [bot](https://discord.com/api/oauth2/authorize?client_id=840623082988503040&permissions=8&scope=bot)
 2. **Set the permissions you want the bot to have in your server**
     - By default the bot is allowed Admin access but you can limit this by creating a role for your discord bots and granting or denying specific permissions.
 3. **Try it out!**
