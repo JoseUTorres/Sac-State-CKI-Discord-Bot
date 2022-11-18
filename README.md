@@ -20,5 +20,44 @@ I will do my best to get features made quickly but I do have work along with my 
 </p>
 
 ## Getting Started
+1. **Invite the bot to your server**
+    - Note: You must an admin or owner of the server to invite the bot
+    - This link will let you invite the bot: https://discord.com/api/oauth2/authorize?client_id=840623082988503040&permissions=8&scope=bot
+2. **Set the permissions you want the bot to have in your server**
+    - By default the bot is allowed Admin access but you can limit this by creating a role for your discord bots and granting or denying specific permissions.
+3. **Try it out!**
+    - To test if everything is good to go just try the /roscoe in a chat to see the cutest dog appear
 
 ## Commands
+1. **/roscoe**
+    - Permissions Required to Use: None
+    - Parameters: None
+    - This command will send over a picture of roscoe to where the command was called.
+
+    <h3 align="center">
+        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1043106982233641020/image.png" alt="/roscoe" height="300px">
+    </h3>
+
+2. **/schedule**
+    - Permissions Required to Use: Ability to manage events
+    - Parameters: channel (required), date (required) (YYYY/MM/DD), time (required)(HH:MM), am-pm (required), atatchment (optional)
+    - This command is used to schedule messages for any desired time and date. You will need to provide the channel where the desired message will send, the date and time the message will be sent, and whether the time is AM or PM. If there are any attachment , i.e images, make sure to add it to the attachment field of the command.
+
+    <h3 align="center">
+        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1043108214528557086/image.png" alt="/roscoe" height="300px">
+    </h3>
+
+    - Once the command is entered you will be prompted to enter the message you desire and you will have 10 mins to do so before the the command times out. Type the message right into the text channel you called the command from.
+    - I suggest drafting your message before using the command because once schedule you cannot edit or delete your message until it is sent.
+    - Note: If you are using an @ like @everyone I suggest using this command in a private channel with limited people in it to avoid pinging everyone when scheduling your message.
+
+    <h3 align="center">
+        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1043109700041986108/image.png" alt="/roscoe">
+    </h3>
+
+    - After the message is entered it will be deleted (as to not spoil the surprise 👌) and the bot will give either a success or error message.
+
+    <h3 align="center">
+        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1043109792203415602/image.png" alt="/roscoe">
+    </h3>
+
