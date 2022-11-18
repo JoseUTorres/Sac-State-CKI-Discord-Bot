@@ -27,7 +27,9 @@ module.exports = {
                 }
 
                 channel.send(content)
-                await channel.send(attachment)
+                if (attachment != null) {
+                    await channel.send(attachment)
+                }
             }
 
             await scheduledSchema.deleteMany(query)
@@ -101,13 +103,12 @@ module.exports = {
                 return
             }
             try {
-                if (attachment != null) {
+                if (attachment == null) {
                     await new scheduledSchema({
                         date: targetDate.valueOf(),
                         content: collectedMessage.content,
                         guildId: guild.id,
                         channelId: targetChannel.id,
-                        attachment: attachment.attachment
                     }).save()
                 } else {
                     await new scheduledSchema({
@@ -115,6 +116,7 @@ module.exports = {
                         content: collectedMessage.content,
                         guildId: guild.id,
                         channelId: targetChannel.id,
+                        attachment: attachment.attachment
                     }).save()
                 }
             } catch (error) {
