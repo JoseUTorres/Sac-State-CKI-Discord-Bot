@@ -1,0 +1,27 @@
+{
+  "name": "cki-discord-bot-js",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoseUTorres/CKI-Discord-BOT-JS.git"
+  },
+  "author": "Jose",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoseUTorres/CKI-Discord-BOT-JS/issues"
+  },
+  "homepage": "https://github.com/JoseUTorres/CKI-Discord-BOT-JS#readme",
+  "dependencies": {
+    "discord.js": "^14.6.0",
+    "dotenv": "^16.0.3",
+    "fs": "^0.0.1-security",
+    "moment-timezone": "^0.5.38",
+    "mongoose": "^6.7.2",
+    "node-fetch": "^3.3.0"
+  }
+}
