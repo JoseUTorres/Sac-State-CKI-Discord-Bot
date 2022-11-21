@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const fs = require('node:fs')
 const path = require('node:path')
 const schedule = require('./commands/schedule')
+const clc = require('cli-color')
 require('dotenv/config')
 
 const commandsPath = path.join(__dirname, 'commands')
@@ -25,7 +26,7 @@ for (const file of commandFiles) {
     if ('data' in command && 'execute' in command) {
         client.commands.set(command.data.name, command)
     } else {
-        console.log(`⚠️ [WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`)
+        console.log(clc.yellow(`⚠️ [WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`))
     }
 }
 
@@ -33,13 +34,13 @@ client.on(Events.InteractionCreate, async interaction => {
     if (!interaction.isChatInputCommand()) return
     const command = interaction.client.commands.get(interaction.commandName)
     if (!command) {
-        console.error(`😐[meh] No command matching ${interaction.commandName} was found`)
+        console.error(clc.yellow(`😐[meh] No command matching ${interaction.commandName} was found`))
         return
     }
     try {
         await command.execute(interaction)
     } catch(error) {
-        console.log(error)
+        console.log(clc.red.bold(error))
         await interaction.reply({ content: 'There was an error while executing this command! Blame Jose!', ephemral: true })
     }
 })
@@ -48,7 +49,7 @@ client.on('ready', () => {
     mongoose.connect(process.env.MONGO_URI, {
         keepAlive: true
     })
-    console.log('bot is ready ✅')
+    console.log(clc.green.bold('CKI bot is ready ✅'))
 })
 
 schedule.init(client)

@@ -1,5 +1,6 @@
 const { REST, Routes } = require('discord.js');
 const fs = require('node:fs');
+const clc = require('cli-color')
 require('dotenv/config');
 
 const commands = [];
@@ -23,7 +24,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 // and deploy your commands!
 (async () => {
 	try {
-		console.log(`Started refreshing ${commands.length} application (/) commands.`);
+		console.log(clc.blue(`Started refreshing ${commands.length} application (/) commands.`));
 
 		// The put method is used to fully refresh all commands in the guild with the current set
 		const data = await rest.put(
@@ -31,13 +32,13 @@ const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 			{ body: commands },
 		);
 
-		const moreData = await rest.put(
-			Routes.applicationGuildCommands(process.env.CLIENT_ID, '840624658205376513'),
-			{ body: commands },
-		);
+		//const moreData = await rest.put(
+		//	Routes.applicationGuildCommands(process.env.CLIENT_ID, '840624658205376513'),
+		//	{ body: commands },
+		//);
 
-		console.log(`Successfully reloaded ${data.length} (/) commands for Sac State CKI.`);
-		console.log(`Successfully reloaded ${moreData.length} (/) commands for lovers.`);
+		console.log(clc.green.bold(`Successfully reloaded ${data.length} (/) commands for Sac State CKI.`));
+		//console.log(`Successfully reloaded ${moreData.length} (/) commands for lovers.`);
 	} catch (error) {
 		// And of course, make sure you catch and log any errors!
 		console.error(error);
