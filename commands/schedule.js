@@ -72,7 +72,7 @@ module.exports = {
                 .setName('attachment')
                 .setDescription('Any files that need to be attached to the message should be uploaded here first.'))
     ,
-    async execute(interaction) {
+    async execute(interaction, client) {
         const guild = interaction.guild
         const timeZone = 'America/Los_Angeles'
         const targetChannel = interaction.options.getChannel('channel')
@@ -87,19 +87,23 @@ module.exports = {
             timeZone
         )
 
-        await interaction.reply({content: 'Please enter the message you would like to schedule.  📬', ephemeral: true})
+        await interaction.reply({content: 'Please DM the bot with your message you would like to schedule.  📅', ephemeral: true})
 
         const filter = (m) => {
             return m.author.id === interaction.user.id
         }
 
-        const collector = interaction.channel.createMessageCollector({ filter, max:1, time:1000 * 600})
+        const dm = await interaction.user.send('Please enter the message you would like to schedule.  📬')
+        const dmChannel = client.channels.cache.get(dm.channelId)
+
+        // const collector = interaction.channel.createMessageCollector({ filter, max:1, time:1000 * 600})
+        const collector = dmChannel.createMessageCollector({ filter, max:1, time:1000 * 600})
 
         collector.on('end', async (collected) => {
             const collectedMessage = collected.first()
 
             if (!collectedMessage) {
-                interaction.editReply({content: 'You did not reply in time. The time limit is 10 mins.', ephemeral: true})
+                await interaction.user.send({content: 'You did not reply in time. The time limit is 10 mins.', ephemeral: true})
                 return
             }
             try {
@@ -120,14 +124,15 @@ module.exports = {
                     }).save()
                 }
             } catch (error) {
-                interaction.editReply({content: 'Invalid time or date format please try again. ❌', ephemeral: true})
-                collectedMessage.delete()
+                await interaction.editReply({content: 'Invalid time or date format please try again. ❌', ephemeral: true})
+                // collectedMessage.delete()
                 return
             }
 
-            collectedMessage.delete()
+            // collectedMessage.delete()
 
-            interaction.editReply({content: 'Your message has been scheduled. ✅', ephemeral: true})
+            await interaction.editReply({content: 'Your message has been scheduled. ✅', ephemeral: true})
+            await interaction.user.send('Your message has been scheduled.  ✅')
         })
 
     }

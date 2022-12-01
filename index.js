@@ -15,6 +15,7 @@ const client = new Client({
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildMessageReactions,
+        GatewayIntentBits.DirectMessages,
     ],
 })
 
@@ -38,7 +39,7 @@ client.on(Events.InteractionCreate, async interaction => {
         return
     }
     try {
-        await command.execute(interaction)
+        await command.execute(interaction, client)
     } catch(error) {
         console.log(clc.red.bold(error))
         await interaction.reply({ content: 'There was an error while executing this command! Blame Jose!', ephemral: true })
