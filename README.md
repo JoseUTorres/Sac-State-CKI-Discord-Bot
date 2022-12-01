@@ -44,20 +44,24 @@ I will do my best to get features made quickly but I do have work along with my 
     - This command is used to schedule messages for any desired time and date. You will need to provide the channel where the desired message will send, the date and time the message will be sent, and whether the time is AM or PM. If there are any attachment , i.e images, make sure to add it to the attachment field of the command.
 
     <h3 align="center">
-        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1043108214528557086/image.png" alt="/roscoe" height="300px">
+        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1043108214528557086/image.png" alt="/schedule" height="300px">
     </h3>
 
-    - Once the command is entered you will be prompted to enter the message you desire and you will have 10 mins to do so before the the command times out. Type the message right into the text channel you called the command from.
+    - Once the command is entered you will be sent a direct message from the bot prompting you to enter the message you desire and you will have 10 mins to do so before the the command times out. Type the message into your direct messages with the bot. The bot will then save your message and send a confirmation message.
     - I suggest drafting your message before using the command because once schedule you cannot edit or delete your message until it is sent.
-    - Note: If you are using an @ like @everyone I suggest using this command in a private text channel with limited people in it to avoid pinging everyone when scheduling your message.
+    - Note: If you are using an @ other than @everyone it will not work when the annoucment is posted. You will have to manually add the @ after the message has been posted.
 
     <h3 align="center">
-        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1043109700041986108/image.png" alt="/roscoe">
+        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1048023300732887050/image.png" alt="/schedule">
     </h3>
 
-    - After the message is entered it will be deleted (as to not spoil the surprise 👌) and the bot will give either a success or error message.
+    <h3 align="center">
+        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1048023789910372392/image.png" alt="/schedule">
+    </h3>
+
+    - The bot will also confirm the by edit the reply to the command in the channel it was called from.
 
     <h3 align="center">
-        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1043109792203415602/image.png" alt="/roscoe">
+        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1043109792203415602/image.png" alt="/schedule">
     </h3>
 
