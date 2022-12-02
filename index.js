@@ -42,7 +42,7 @@ client.on(Events.InteractionCreate, async interaction => {
         await command.execute(interaction, client)
     } catch(error) {
         console.log(clc.red.bold(error))
-        await interaction.reply({ content: 'There was an error while executing this command! Blame Jose!', ephemral: true })
+        await interaction.reply({ content: 'There was an error while executing this command! Blame Jose!', ephemeral: true })
     }
 })
 

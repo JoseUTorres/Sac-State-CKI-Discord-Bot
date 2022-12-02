@@ -1,6 +1,6 @@
 {
-  "name": "cki-discord-bot-js",
-  "version": "2.1.0",
+  "name": "sac-state-cki-discord-bot",
+  "version": "2.3.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -18,6 +18,7 @@
   "homepage": "https://github.com/JoseUTorres/CKI-Discord-BOT-JS#readme",
   "dependencies": {
     "cli-color": "^2.0.3",
+    "convert-excel-to-json": "^1.7.0",
     "discord.js": "^14.6.0",
     "dotenv": "^16.0.3",
     "fs": "^0.0.1-security",
