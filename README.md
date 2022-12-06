@@ -5,7 +5,7 @@
     Sac State CKI Discord Bot
 </h1>
 <p align="center">
-    <img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/JoseUTorres/Sac-State-CKI-Discord-Bot?include_prereleases&style=for-the-badge">
+    <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/JoseUTorres/Sac-State-CKI-Discord-Bot?style=for-the-badge">
 </p>
 <img src="https://live.staticflickr.com/65535/51665025161_3eddcb15b5_w.jpg" alt="ftc" align="right" height="200px">
 
