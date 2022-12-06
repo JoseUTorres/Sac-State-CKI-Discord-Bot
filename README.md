@@ -29,6 +29,24 @@ I will do my best to get features made quickly but I do have work along with my 
     - To test if everything is good to go just try the /roscoe in a chat to see the cutest dog appear
 
 ## Commands
+
+#### Where to access command directory
+- All commands can be found by typing "/" into any channel
+- On the left you will see a list of bots in the server
+
+<h3 align="center">
+    <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1049557823727620206/image.png" alt="/roscoe" height="300px">
+</h3>
+
+- Click on the bot with the CKI logo
+<h3 align="center">
+    <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1049558293829406810/image.png" alt="/roscoe" height="300px">
+</h3>
+
+- You now can view all the commands available and read the names and descriptions of the commands
+
+#### How to use each command
+
 1. **/roscoe**
     - Permissions Required to Use: None
     - Parameters: None
