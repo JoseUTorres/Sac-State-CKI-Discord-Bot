@@ -65,3 +65,23 @@ I will do my best to get features made quickly but I do have work along with my 
         <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1043109792203415602/image.png" alt="/schedule">
     </h3>
 
+3. **/hours**
+    - Permissions Required to Use: None
+    - Parameters: first-name (required), last-name(required)
+    - This command is used to get information about your current hours and MRP status according to the last updated MRS. The user can access only information about their own hours and if they are current memeber of the club
+
+    <h3 align="center">
+        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1049555353685209110/image.png" alt="/schedule">
+    </h3>
+
+    - Once the command is entered a DM will be sent from the bot with following information: when the MRS was last updated, service, leadership, and fellowship hours. Lastly if the user is at MRP status of Bronze or higher that will also be provided.
+
+    <h3 align="center">
+        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1049556341414449152/image.png" alt="/schedule">
+    </h3>
+
+    <h3 align="center">
+        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1049556455545651230/image.png" alt="/schedule">
+    </h3>
+    
+    - Note: If you have any questions about your hours please reach out to your Membership and Recognition chair.
