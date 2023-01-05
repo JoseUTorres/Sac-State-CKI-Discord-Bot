@@ -84,7 +84,7 @@ module.exports = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName('remove')
-                .setDescription('Remove any currently scheduled posts. Example: 3')
+                .setDescription('Remove any currently scheduled posts.')
                 .addStringOption(option =>
                     option
                         .setName('post')
@@ -105,13 +105,14 @@ module.exports = {
                 var options = {
                     hour: 'numeric',
                     minute: 'numeric',
-                    hour12: true
+                    hour12: true,
+                    timeZone: 'America/Los_Angeles'
                 }
                 for (const post of posts) {
                     counter++
                     var date = new Date(post.date)
                     dateString = date.toLocaleDateString('en-US', options)
-                    postsEmbed.addFields({name: `Post ${counter}`, value: `Content: ${post.content}\nDate: ${dateString}`})
+                    postsEmbed.addFields({name: `Post ${counter}`, value: `Content: \`\`\`${post.content}\`\`\`\n\nDate: \`\`\`${dateString}\`\`\``})
                 }
                 await interaction.reply({content: ' ', embeds: [postsEmbed], ephemeral: true})
             }
@@ -126,12 +127,11 @@ module.exports = {
                 if (Number.isInteger(post) == false || posts[post] == null) {
                     await interaction.reply({content: 'Invalid post number! Please try again.  ❌', ephemeral: true})
                     return
-            }
+                }
                 const query = posts[post]
                 await scheduledSchema.deleteOne(query) 
                 await interaction.reply({content: 'The post has been removed!  👌', ephemeral: true})
             } else {
-                console.log(interaction.user.id)
                 await interaction.reply({content: 'Insufficent permissions.  ❌', ephemeral: true})
                 return
             }
