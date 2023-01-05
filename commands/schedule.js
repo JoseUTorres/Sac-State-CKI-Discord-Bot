@@ -112,7 +112,7 @@ module.exports = {
                     counter++
                     var date = new Date(post.date)
                     dateString = date.toLocaleDateString('en-US', options)
-                    postsEmbed.addFields({name: `Post ${counter}`, value: `Content: \`\`\`${post.content}\`\`\`\n\nDate: \`\`\`${dateString}\`\`\``})
+                    postsEmbed.addFields({name: `Post ${counter}`, value: `Content: \`\`\`${post.content}\`\`\`\nDate: \`\`\`${dateString}\`\`\``})
                 }
                 await interaction.reply({content: ' ', embeds: [postsEmbed], ephemeral: true})
             }
