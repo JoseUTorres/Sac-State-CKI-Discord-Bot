@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js")
 const hours = require('../data/hours.json')
-const lastUpdated = 'September 2022'
+const lastUpdated = 'January 2023'
 
 module.exports = {
     data: new SlashCommandBuilder()
