@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const fs = require('node:fs')
 const path = require('node:path')
 const schedule = require('./commands/schedule')
+const signup = require('./commands/signup')
 const clc = require('cli-color')
 require('dotenv/config')
 
@@ -54,5 +55,6 @@ client.on('ready', () => {
 })
 
 schedule.init(client)
+signup.init()
 
 client.login(process.env.TOKEN)
