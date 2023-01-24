@@ -38,7 +38,7 @@ async function getSheetTitles() {
     }
 
     sheetTitles = sheetTitles.filter(value => value)
-    //console.log(sheetTitles)
+
     return sheetTitles
 
 }
@@ -81,13 +81,15 @@ module.exports = {
             sheetTitles.then((result) => {
 
                 result.forEach(event => {
-
+        
                     if (!(data.options[1].options[0].choices.some(item => item.name === event.name))) {
                         data.options[1].options[0].addChoices(event)
                     }
+
                 })
 
                 data.options[1].options[0].choices.forEach(choice => {
+                    
                     if (!(result.some(item => item.name === choice.name))) {
                         const index = data.options[1].options[0].choices.indexOf(choice)
                         data.options[1].options[0].choices.splice(index, 1)
