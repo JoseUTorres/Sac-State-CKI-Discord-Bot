@@ -5,6 +5,48 @@ require('dotenv/config')
 const { GoogleAuth } = require('google-auth-library')
 const { google } = require("googleapis")
 
+async function signupUser(userInfo) {
+
+    const auth = new GoogleAuth({
+        keyFile: 'credentials.json',
+        scopes: 'https://www.googleapis.com/auth/spreadsheets'
+    })
+
+    const service = google.sheets({ version: 'v4', auth})
+
+    const spreadsheetId = "1pcJTPyL84FcNNGmjfFk-HxziBRKmE_vT2uanuFsvccc"
+
+    try {
+
+        // const result = await service.spreadsheets.values.get({
+        //     spreadsheetId,
+        //     majorDimension: "ROWS",
+        //     range: '1/24 Soup Kitchen!B6:M50'
+        // })
+
+        let values = [
+            [
+                `${userInfo.name}`, '', '', `${userInfo.carpool}`, '', '', `${userInfo.contact}`, '', '', `${userInfo.location}`
+            ]
+        ]
+
+        const resource = {
+            values,
+        }
+
+        const result = service.spreadsheets.values.append({
+            spreadsheetId,
+            range: `${userInfo.eventName}!B6:M50`,
+            valueInputOption: 'RAW',
+            resource
+        })
+
+    } catch (err) {
+        throw err
+    }
+
+}
+
 async function getSheetTitles() {
 
     const auth = new GoogleAuth({
@@ -46,32 +88,55 @@ async function getSheetTitles() {
 let data = new SlashCommandBuilder()
         .setName('signup')
         .setDescription('Sign up for upcoming events to help us accomondate for attendance and carpool.')
-        .addSubcommand(subcommand =>
-            subcommand
-                .setName('details')
-                .setDescription('View the full details for upcoming events before signing up.')
-        )
-        .addSubcommand(subcommand =>
-            subcommand
-                .setName('sheet')
-                .setDescription('Enter your name and ride situation to sign up for an event.')
-                .addStringOption(option =>
-                    option
-                        .setName('event')
-                        .setDescription('Enter the event you would like to sign up for.')
-                        .setRequired(true)
-                        .addChoices(
-                            { name: 'test', value: 'test' }
-                        )
+        .addStringOption(option =>
+            option
+                .setName('event')
+                .setDescription('Enter the event you would like to sign up for.')
+                .setRequired(true)
+                .addChoices(
+                    { name: 'test', value: 'test' }
                 )
+        )
+        .addStringOption(option =>
+            option
+                .setName('name')
+                .setDescription('Enter the name that will be placed on the sign up sheet.')
+                .setRequired(true)
+        )
+        .addStringOption(option => 
+            option
+                .setName('carpool')
+                .setDescription('Enter your ride situation so we can plan accordingly.')
+                .setRequired(true)
+                .addChoices(
+                    { name: 'I have my own!', value: 'I have my own!' },
+                    { name: 'I offer rides!', value: 'I offer rides!' },
+                    { name: 'I need a ride!', value: 'I need a ride!' },
+                    { name: 'Online!', value: 'Online!'},
+                )
+        )
+        .addStringOption(option =>
+            option
+                .setName('contact')
+                .setDescription('Enter what platform would best to contact you.')
+                .setRequired(true)
+        )
+        .addStringOption(option =>
+            option
+                .setName('location')
+                .setDescription('Enter where you will be near.')
+                .setRequired(true)
         )
 
 module.exports = {
     init: () => {
 
         const commands = []
-        const command = require(`../commands/signup.js`)
-        commands.push(command.data.toJSON())
+        const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
+        for (const file of commandFiles) {
+            const command = require(`../commands/${file}`);
+            commands.push(command.data.toJSON());
+        }
 
         const rest = new REST({ version: '10' }).setToken(process.env.TOKEN)
 
@@ -82,17 +147,17 @@ module.exports = {
 
                 result.forEach(event => {
         
-                    if (!(data.options[1].options[0].choices.some(item => item.name === event.name))) {
-                        data.options[1].options[0].addChoices(event)
+                    if (!(data.options[0].choices.some(item => item.name === event.name))) {
+                        data.options[0].addChoices(event)
                     }
 
                 })
 
-                data.options[1].options[0].choices.forEach(choice => {
+                data.options[0].choices.forEach(choice => {
                     
                     if (!(result.some(item => item.name === choice.name))) {
-                        const index = data.options[1].options[0].choices.indexOf(choice)
-                        data.options[1].options[0].choices.splice(index, 1)
+                        const index = data.options[0].choices.indexOf(choice)
+                        data.options[0].choices.splice(index, 1)
                     }
                     
                 })
@@ -114,8 +179,31 @@ module.exports = {
     ,
     data: data
     ,
-    async execute(interaction, client) {
+    async execute(interaction) {
         
+        if (interaction.options.getSubcommand() === 'sheet') {
+
+            const userName = interaction.options.getString('name')
+            const eventName = interaction.options.getString('event')
+            const carpool = interaction.options.getString('carpool')
+            const contact = interaction.options.getString('contact')
+            const location = interaction.options.getString('location')
+
+            const userInfo = {
+                name: userName,
+                eventName: eventName,
+                carpool: carpool,
+                contact: contact,
+                location: location
+            }
+
+            await interaction.deferReply({ephemeral: true})
+
+            signupUser(userInfo).then(() => {
+                interaction.editReply({ content: 'You have been signed up!\nCheck out the sign up sheet here for more info.\nhttps://tinyurl.com/SacStateCKISignUpSheets'})
+            })
+
+        }
         
     }
 }
