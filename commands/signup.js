@@ -119,13 +119,11 @@ let data = new SlashCommandBuilder()
             option
                 .setName('contact')
                 .setDescription('Enter what platform would best to contact you.')
-                .setRequired(true)
         )
         .addStringOption(option =>
             option
                 .setName('location')
                 .setDescription('Enter where you will be near.')
-                .setRequired(true)
         )
 
 module.exports = {
