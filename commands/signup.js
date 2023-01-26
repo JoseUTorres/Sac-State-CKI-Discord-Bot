@@ -179,41 +179,37 @@ module.exports = {
     ,
     async execute(interaction) {
         
-        if (interaction.options.getSubcommand() === 'sheet') {
+        const userName = interaction.options.getString('name')
+        const eventName = interaction.options.getString('event')
+        const carpool = interaction.options.getString('carpool')
+        let contact = interaction.options.getString('contact')
+        let location = interaction.options.getString('location')
 
-            const userName = interaction.options.getString('name')
-            const eventName = interaction.options.getString('event')
-            const carpool = interaction.options.getString('carpool')
-            let contact = interaction.options.getString('contact')
-            let location = interaction.options.getString('location')
+        if (contact === undefined || contact === null) {
 
-            if (contact === undefined || contact === null) {
-
-                contact = ''
-
-            }
-
-            if (location === undefined || location === null) {
-
-                location = ''
-
-            }
-
-            const userInfo = {
-                name: userName,
-                eventName: eventName,
-                carpool: carpool,
-                contact: contact,
-                location: location
-            }
-
-            await interaction.deferReply({ephemeral: true})
-
-            signupUser(userInfo).then(() => {
-                interaction.editReply({ content: 'You have been signed up!\nCheck out the sign up sheet here for more info.\nhttps://tinyurl.com/SacStateCKISignUpSheets'})
-            })
+            contact = ''
 
         }
-        
+
+        if (location === undefined || location === null) {
+
+            location = ''
+
+        }
+
+        const userInfo = {
+            name: userName,
+            eventName: eventName,
+            carpool: carpool,
+            contact: contact,
+            location: location
+        }
+
+        await interaction.deferReply({ephemeral: true})
+
+        signupUser(userInfo).then(() => {
+            interaction.editReply({ content: 'You have been signed up!\nCheck out the sign up sheet here for more info.\nhttps://tinyurl.com/SacStateCKISignUpSheets'})
+        })
+
     }
 }
