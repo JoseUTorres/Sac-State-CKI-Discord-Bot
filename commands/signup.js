@@ -184,8 +184,20 @@ module.exports = {
             const userName = interaction.options.getString('name')
             const eventName = interaction.options.getString('event')
             const carpool = interaction.options.getString('carpool')
-            const contact = interaction.options.getString('contact')
-            const location = interaction.options.getString('location')
+            let contact = interaction.options.getString('contact')
+            let location = interaction.options.getString('location')
+
+            if (contact === undefined || contact === null) {
+
+                contact = ''
+
+            }
+
+            if (location === undefined || location === null) {
+
+                location = ''
+
+            }
 
             const userInfo = {
                 name: userName,
