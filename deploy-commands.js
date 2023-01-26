@@ -33,7 +33,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 		);
 
 		//const moreData = await rest.put(
-		//	Routes.applicationGuildCommands(process.env.CLIENT_ID, '840624658205376513'),
+		//	Routes.applicationGuildCommands(process.env.CLIENT_ID, ''),
 		//	{ body: commands },
 		//);
 
