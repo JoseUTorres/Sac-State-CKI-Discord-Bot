@@ -19,18 +19,10 @@ I will do my best to get features made quickly but I do have work along with my 
     - jose 
 </p>
 
-## Getting Started
-1. **Invite the bot to your server**
-    - Note: You must an admin or owner of the server to invite the bot
-    - This link will let you invite the [bot](https://discord.com/api/oauth2/authorize?client_id=840623082988503040&permissions=8&scope=bot)
-2. **Set the permissions you want the bot to have in your server**
-    - By default the bot is allowed Admin access but you can limit this by creating a role for your discord bots and granting or denying specific permissions.
-3. **Try it out!**
-    - To test if everything is good to go just try the /roscoe in a chat to see the cutest dog appear
-
+- - - -
 ## Commands
 
-#### Where to access command directory
+### Where to access command directory
 - All commands can be found by typing "/" into any channel
 - On the left you will see a list of bots in the server
 
@@ -45,29 +37,30 @@ I will do my best to get features made quickly but I do have work along with my 
 
 - You now can view all the commands available and read the names and descriptions of the commands
 
-#### How to use each command
+### How to use each command
 
-1. **/roscoe**
-    - Permissions Required to Use: None
-    - Parameters: None
-    - This command will send over a picture of roscoe to where the command was called.
+#### 1. /roscoe
+- Permissions Required to Use: None
+- Parameters: None
+- This command will send over a picture of roscoe to where the command was called.
 
-    <h3 align="center">
-        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1043106982233641020/image.png" alt="/roscoe" height="300px">
-    </h3>
+<h3 align="center">
+    <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1043106982233641020/image.png" alt="/roscoe" height="300px">
+</h3>
 
-2. **/schedule**
+#### 2. /schedule
+1. __/schedule post__ 
     - Permissions Required to Use: Ability to manage events
     - Parameters: channel (required), date (required) (YYYY/MM/DD), time (required)(HH:MM), am-pm (required), atatchment (optional)
     - This command is used to schedule messages for any desired time and date. You will need to provide the channel where the desired message will send, the date and time the message will be sent, and whether the time is AM or PM. If there are any attachment , i.e images, make sure to add it to the attachment field of the command.
 
     <h3 align="center">
-        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1043108214528557086/image.png" alt="/schedule" height="300px">
+        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1068763148716359690/Screen_Shot_2023-01-27_at_9.22.19_PM.png" alt="/schedule" height="300px">
     </h3>
 
     - Once the command is entered you will be sent a direct message from the bot prompting you to enter the message you desire and you will have 10 mins to do so before the the command times out. Type the message into your direct messages with the bot. The bot will then save your message and send a confirmation message.
     - I suggest drafting your message before using the command because once schedule you cannot edit or delete your message until it is sent.
-    - Note: If you are using an @ other than @everyone it will not work when the annoucment is posted. You will have to manually add the @ after the message has been posted.
+    - Note: If you are using an @ other than @everyone it will not work when the annoucment is posted.
 
     <h3 align="center">
         <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1048023300732887050/image.png" alt="/schedule">
@@ -83,23 +76,58 @@ I will do my best to get features made quickly but I do have work along with my 
         <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1043109792203415602/image.png" alt="/schedule">
     </h3>
 
-3. **/hours**
-    - Permissions Required to Use: None
-    - Parameters: first-name (required), last-name(required)
-    - This command is used to get information about your current hours and MRP status according to the last updated MRS. The user can access only information about their own hours and if they are current memeber of the club
+2. __/schedule view__
+    - Permissions Required to Use: Ability to manage events
+    - Parameters: None
+    - This command is to view all the currently scheduled posts along with the scheduled date. Each post is also assigned a number.
 
     <h3 align="center">
-        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1049555353685209110/image.png" alt="/schedule">
+        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1068765560436953159/Screen_Shot_2023-01-27_at_9.32.28_PM.png" alt="/schedule" height="300px">
     </h3>
 
-    - Once the command is entered a DM will be sent from the bot with following information: when the MRS was last updated, service, leadership, and fellowship hours. Lastly if the user is at MRP status of Bronze or higher that will also be provided.
+3. __/schedule remove__
+    - Permissions Required to Use: President or PR role
+    - Parameters: Post number (required)
+    - You can get the post number from /schedule view and once the command is sent the post will be removed and will not be posted.
 
     <h3 align="center">
-        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1049556341414449152/image.png" alt="/schedule">
+        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1068768312189788160/Screen_Shot_2023-01-27_at_9.43.18_PM.png" alt="/schedule" width="800px">
     </h3>
 
-    <h3 align="center">
-        <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1049556455545651230/image.png" alt="/schedule">
-    </h3>
-    
-    - Note: If you have any questions about your hours please reach out to your Membership and Recognition chair.
+#### 3. /hours
+- Permissions Required to Use: None
+- Parameters: first-name (required), last-name(required)
+- This command is used to get information about your current hours and MRP status according to the last updated MRS. The user can access only information about their own hours and if they are current memeber of the club
+
+<h3 align="center">
+    <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1049555353685209110/image.png" alt="/schedule">
+</h3>
+
+- Once the command is entered a DM will be sent from the bot with following information: when the MRS was last updated, service, leadership, and fellowship hours. Lastly if the user is at MRP status of Bronze or higher that will also be provided.
+
+<h3 align="center">
+    <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1049556341414449152/image.png" alt="/schedule">
+</h3>
+
+<h3 align="center">
+    <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1049556455545651230/image.png" alt="/schedule">
+</h3>
+
+- Note: If you have any questions about your hours please reach out to your Membership and Recognition chair.
+
+#### 4. /signup
+- Permissions Required to Use: None
+- Parameters: event (required), name (required), carpool (required), contact (optional), location (optional)
+- This command is used to sign up for events on the Sac State CKI sign up sheet.
+
+<h3 align="center">
+    <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1068771139171647578/Screen_Shot_2023-01-27_at_9.54.41_PM.png" alt="/schedule" width="800px">
+</h3>
+
+<h3 align="center">
+    <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1068771777641201704/Screen_Shot_2023-01-27_at_9.57.17_PM.png" alt="/schedule" width="800px">
+</h3>
+
+<h3 align="center">
+    <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1068772585518665728/Screen_Shot_2023-01-27_at_10.00.28_PM.png" alt="/schedule" width="800px">
+</h3>
