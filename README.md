@@ -39,7 +39,7 @@ I will do my best to get features made quickly but I do have work along with my 
 
 ### How to use each command
 
-#### 1. /roscoe
+#### 1. __/roscoe__
 - Permissions Required to Use: None
 - Parameters: None
 - This command will send over a picture of roscoe to where the command was called.
@@ -48,7 +48,7 @@ I will do my best to get features made quickly but I do have work along with my 
     <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1043106982233641020/image.png" alt="/roscoe" height="300px">
 </h3>
 
-#### 2. /schedule
+#### 2. __/schedule__
 1. __/schedule post__ 
     - Permissions Required to Use: Ability to manage events
     - Parameters: channel (required), date (required) (YYYY/MM/DD), time (required)(HH:MM), am-pm (required), atatchment (optional)
@@ -94,7 +94,7 @@ I will do my best to get features made quickly but I do have work along with my 
         <img src="https://cdn.discordapp.com/attachments/1010399797338980363/1068768312189788160/Screen_Shot_2023-01-27_at_9.43.18_PM.png" alt="/schedule" width="800px">
     </h3>
 
-#### 3. /hours
+#### 3. __/hours__
 - Permissions Required to Use: None
 - Parameters: first-name (required), last-name(required)
 - This command is used to get information about your current hours and MRP status according to the last updated MRS. The user can access only information about their own hours and if they are current memeber of the club
@@ -115,7 +115,7 @@ I will do my best to get features made quickly but I do have work along with my 
 
 - Note: If you have any questions about your hours please reach out to your Membership and Recognition chair.
 
-#### 4. /signup
+#### 4. __/signup__
 - Permissions Required to Use: None
 - Parameters: event (required), name (required), carpool (required), contact (optional), location (optional)
 - This command is used to sign up for events on the Sac State CKI sign up sheet.
