@@ -98,6 +98,41 @@ async function getSheetTitles() {
 	return sheetTitles;
 }
 
+async function getSignedUsers(eventName) {
+	const auth = new GoogleAuth({
+		keyFile: "credentials.json",
+		scopes: "https://www.googleapis.com/auth/spreadsheets",
+	});
+
+	const service = google.sheets({ version: "v4", auth });
+
+	const spreadsheetId = "1pcJTPyL84FcNNGmjfFk-HxziBRKmE_vT2uanuFsvccc";
+
+	try {
+		const result = await service.spreadsheets.get({
+			spreadsheetId,
+		});
+
+		var sheets = result.data.sheets;
+		var sheet = sheets.find((element) =>
+			element.properties.title.includes(eventName)
+		);
+
+		const users = await service.spreadsheets.values.get({
+			spreadsheetId,
+			range: `${sheet.properties.title}!B6:B50`,
+		});
+		// convert 2D array to 1D array
+		var userArr = [];
+		if (users.data.values !== undefined) {
+			userArr = [].concat(...users.data.values);
+		}
+		return userArr;
+	} catch (err) {
+		throw err;
+	}
+}
+
 let data = new SlashCommandBuilder()
 	.setName("signup")
 	.setDescription(
@@ -149,6 +184,22 @@ module.exports = {
 			});
 		}
 
+		async function getMembers(guild) {
+			return new Promise((resolve) => {
+				setTimeout(() => {
+					resolve(guild.members.fetch());
+				}, 5000);
+			});
+		}
+
+		async function getRoles(guild) {
+			return new Promise((resolve) => {
+				setTimeout(() => {
+					resolve(guild.roles.fetch());
+				}, 5000);
+			});
+		}
+
 		const commands = [];
 		const commandFiles = fs
 			.readdirSync("./commands")
@@ -161,6 +212,8 @@ module.exports = {
 		const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
 		const guild = await getGuild();
+		const members = await getMembers(guild);
+		const roles = await getRoles(guild);
 		const channelsArray = Array.from(guild.channels.cache.values());
 		let channelNames = [];
 		channelsArray.forEach((channel) => {
@@ -168,15 +221,22 @@ module.exports = {
 		});
 
 		const checkForSheets = async () => {
+			// get sheet titles
 			let sheetTitles = getSheetTitles();
+			// once sheet titles are available
 			sheetTitles.then((result) => {
+				// loop through each sheet
 				result.forEach((event) => {
+					// if the sheet title is not a choice in the command
 					if (
 						!data.options[0].choices.some((item) => item.name === event.name)
 					) {
+						// add it to choices
 						data.options[0].addChoices(event);
 					}
+					// format channel to the event title
 					let eventChannelName = event.name.replaceAll(" ", "-");
+					// search for a text channel with that event name and if doesn't exist create a channel for it
 					if (
 						guild.channels.cache.find(
 							(channel) =>
@@ -184,18 +244,55 @@ module.exports = {
 								eventChannelName.replaceAll("/", "").toLowerCase()
 						) === undefined
 					) {
-						// add parent category for all carpool channels to be under
 						guild.channels.create({
 							name: event.name,
+							parent: "1076297891162886164",
 						});
 					}
+					// search for a role with that event name if doesn't exist create a role for it
+					if (
+						guild.roles.cache.find((role) => role.name === event.name) ===
+						undefined
+					) {
+						guild.roles.create({ name: `${event.name}` });
+					}
+					// get the list of users for that event
+					let users = getSignedUsers(event.name);
+					// once user list is available
+					users.then((result) => {
+						// loop through each user
+						result.forEach((user) => {
+							// format user string
+							if (user.includes(" ")) {
+								user = user.split(" ");
+								user = user[0];
+							}
+							// find them on discord
+							var member;
+							members.forEach((m) => {
+								if (m.nickname !== null) {
+									if (m.nickname.includes(user)) {
+										member = m;
+									}
+								}
+							});
+							// if the member is found then
+							if (member !== undefined) {
+								// give them event role
+								var role = roles.find((role) => role.name === `${event.name}`);
+								member.roles.add(role);
+							}
+						});
+					});
 				});
-
+				// for each choice in the command
 				data.options[0].choices.forEach((choice) => {
+					// if there is no event in the sheet with the choice name
 					if (!result.some((item) => item.name === choice.name)) {
+						// remove that event from choices in command once it has been removed from sheets
 						const index = data.options[0].choices.indexOf(choice);
 						data.options[0].choices.splice(index, 1);
-						// remove channel
+						// remove channel once it has been removed from sheets
 						const channelDelete = guild.channels.cache.find(
 							(channel) =>
 								channel.name ===
@@ -207,10 +304,16 @@ module.exports = {
 						if (channelDelete !== undefined) {
 							channelDelete.delete();
 						}
+						const roleDelete = guild.roles.cache.find(
+							(role) => role.name === choice.name
+						);
+						if (roleDelete !== undefined) {
+							roleDelete.delete();
+						}
 					}
 				});
 			});
-
+			// refresh commands
 			const d = await rest.put(
 				Routes.applicationGuildCommands(
 					process.env.CLIENT_ID,
@@ -218,7 +321,7 @@ module.exports = {
 				),
 				{ body: commands }
 			);
-
+			// refresh this command every minute
 			setTimeout(checkForSheets, 1000 * 60);
 		};
 
