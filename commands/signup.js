@@ -280,7 +280,9 @@ module.exports = {
 							if (member !== undefined) {
 								// give them event role
 								var role = roles.find((role) => role.name === `${event.name}`);
-								member.roles.add(role);
+								if (role !== undefined) {
+									member.roles.add(role);
+								}
 							}
 						});
 					});
