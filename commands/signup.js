@@ -2,6 +2,7 @@ const {
 	SlashCommandBuilder,
 	PermissionFlagBits,
 	EmbedBuilder,
+	PermissionsBitField,
 } = require("discord.js");
 const { REST, Routes } = require("discord.js");
 const fs = require("node:fs");
@@ -200,6 +201,35 @@ module.exports = {
 			});
 		}
 
+		async function createRole(guild, roleName) {
+			return new Promise((resolve) => {
+				setTimeout(() => {
+					resolve(guild.roles.create({ name: `${roleName}` }));
+				}, 5000);
+			});
+		}
+
+		async function createChannel(guild, channelName) {
+			return new Promise((resolve) => {
+				setTimeout(() => {
+					resolve(
+						guild.channels.create({
+							name: channelName,
+							parent: "1076297891162886164",
+						})
+					);
+				}, 5000);
+			});
+		}
+
+		async function findMember(members, user) {
+			return new Promise((resolve) => {
+				setTimeout(() => {
+					resolve(members.find((m) => m.nickname === user));
+				}, 5000);
+			});
+		}
+
 		const commands = [];
 		const commandFiles = fs
 			.readdirSync("./commands")
@@ -226,7 +256,7 @@ module.exports = {
 			// once sheet titles are available
 			sheetTitles.then((result) => {
 				// loop through each sheet
-				result.forEach((event) => {
+				result.forEach(async (event) => {
 					// if the sheet title is not a choice in the command
 					if (
 						!data.options[0].choices.some((item) => item.name === event.name)
@@ -236,6 +266,16 @@ module.exports = {
 					}
 					// format channel to the event title
 					let eventChannelName = event.name.replaceAll(" ", "-");
+					// search for a role with that event name if doesn't exist create a role for it
+					if (
+						guild.roles.cache.find((role) => role.name === event.name) ===
+						undefined
+					) {
+						await createRole(guild, event.name);
+					}
+					var roleCreated = guild.roles.cache.find(
+						(role) => role.name === event.name
+					);
 					// search for a text channel with that event name and if doesn't exist create a channel for it
 					if (
 						guild.channels.cache.find(
@@ -244,44 +284,47 @@ module.exports = {
 								eventChannelName.replaceAll("/", "").toLowerCase()
 						) === undefined
 					) {
-						guild.channels.create({
-							name: event.name,
-							parent: "1076297891162886164",
-						});
+						await createChannel(guild, event.name);
 					}
-					// search for a role with that event name if doesn't exist create a role for it
-					if (
-						guild.roles.cache.find((role) => role.name === event.name) ===
-						undefined
-					) {
-						guild.roles.create({ name: `${event.name}` });
-					}
+					var channelCreated = guild.channels.cache.find(
+						(channel) =>
+							channel.name ===
+							eventChannelName.replaceAll("/", "").toLowerCase()
+					);
+					channelCreated.permissionOverwrites.create(guild.roles.everyone, {
+						ViewChannel: true,
+						SendMessages: true,
+						AddReactions: true,
+						AttachFiles: true,
+						EmbedLinks: true,
+					});
 					// get the list of users for that event
 					let users = getSignedUsers(event.name);
 					// once user list is available
 					users.then((result) => {
 						// loop through each user
-						result.forEach((user) => {
+						result.forEach(async (user) => {
 							// format user string
 							if (user.includes(" ")) {
-								user = user.split(" ");
-								user = user[0];
+								if (user === "Matthew Christiansen") {
+									user = "Matthew C.";
+								} else {
+									user = user.split(" ");
+									user = user[0];
+								}
 							}
 							// find them on discord
-							var member;
-							members.forEach((m) => {
-								if (m.nickname !== null) {
-									if (m.nickname.includes(user)) {
-										member = m;
-									}
-								}
-							});
+							console.log(user);
+							var member = await findMember(members, user);
+							console.log(member);
 							// if the member is found then
 							if (member !== undefined) {
 								// give them event role
-								var role = roles.find((role) => role.name === `${event.name}`);
-								if (role !== undefined) {
-									member.roles.add(role);
+								var roleAdd = roles.find(
+									(role) => role.name === `${event.name}`
+								);
+								if (roleAdd !== undefined) {
+									member.roles.add(roleAdd);
 								}
 							}
 						});
