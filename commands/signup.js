@@ -242,15 +242,14 @@ module.exports = {
 		const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
 		const guild = await getGuild();
-		const members = await getMembers(guild);
-		const roles = await getRoles(guild);
-		const channelsArray = Array.from(guild.channels.cache.values());
-		let channelNames = [];
-		channelsArray.forEach((channel) => {
-			channelNames.push(channel.name);
-		});
 
 		const checkForSheets = async () => {
+			const members = await getMembers(guild);
+			const channelsArray = Array.from(guild.channels.cache.values());
+			let channelNames = [];
+			channelsArray.forEach((channel) => {
+				channelNames.push(channel.name);
+			});
 			// get sheet titles
 			let sheetTitles = getSheetTitles();
 			// once sheet titles are available
@@ -273,9 +272,6 @@ module.exports = {
 					) {
 						await createRole(guild, event.name);
 					}
-					var roleCreated = guild.roles.cache.find(
-						(role) => role.name === event.name
-					);
 					// search for a text channel with that event name and if doesn't exist create a channel for it
 					if (
 						guild.channels.cache.find(
@@ -306,20 +302,21 @@ module.exports = {
 						result.forEach(async (user) => {
 							// format user string
 							if (user.includes(" ")) {
-								if (user === "Matthew Christiansen") {
+								if (user.toLowerCase() === "matthew christiansen") {
 									user = "Matthew C.";
+								} else if (user.toLowerCase() === "josh narciso") {
+									user = "Josh N.";
 								} else {
 									user = user.split(" ");
 									user = user[0];
 								}
 							}
 							// find them on discord
-							console.log(user);
 							var member = await findMember(members, user);
-							console.log(member);
 							// if the member is found then
 							if (member !== undefined) {
 								// give them event role
+								const roles = await getRoles(guild);
 								var roleAdd = roles.find(
 									(role) => role.name === `${event.name}`
 								);
